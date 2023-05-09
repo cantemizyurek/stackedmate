@@ -1,7 +1,7 @@
 import BinaryHeap from './BinaryHeap'
 
 describe('BinaryHeap', () => {
-  const comparison = (a: number, b: number) => a - b
+  const comparison = (a: number, b: number): number => a - b
   let binaryHeap: BinaryHeap<number>
 
   beforeEach(() => {

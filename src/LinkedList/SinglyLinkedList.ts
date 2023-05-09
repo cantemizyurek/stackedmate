@@ -1,4 +1,4 @@
-import { LinkedList, LinkedListNode } from './LinkedList'
+import type { LinkedList, LinkedListNode } from './LinkedList'
 
 interface SinglyLinkedListNode<T> extends LinkedListNode<T> {
   value: T
@@ -17,8 +17,8 @@ class SinglyLinkedList<T>
     this.length = 0
     this.head = null
 
-    if (iterable) {
-      for (let item of iterable) {
+    if (iterable !== undefined) {
+      for (const item of iterable) {
         this.push(item)
       }
     }
@@ -26,16 +26,16 @@ class SinglyLinkedList<T>
 
   push(value: T): void {
     this.length += 1
-    let node = this.createNode(value)
+    const node = this.createNode(value)
 
-    if (!this.head) {
+    if (this.head === null) {
       this.head = node
       return
     }
 
     let cur = this.head
 
-    while (cur.next) {
+    while (cur.next !== null) {
       cur = cur.next
     }
 
@@ -47,8 +47,8 @@ class SinglyLinkedList<T>
 
     this.length -= 1
 
-    if (this.length == 0) {
-      let cur = this.head
+    if (this.length === 0) {
+      const cur = this.head
       this.head = null
       return cur.value
     }
@@ -56,18 +56,19 @@ class SinglyLinkedList<T>
     let prev: SinglyLinkedListNode<T> | null = null
     let cur: SinglyLinkedListNode<T> = this.head
 
-    while (cur.next) {
+    while (cur.next !== null) {
       prev = cur
       cur = cur.next
     }
 
-    prev!.next = null
+    if (prev === null) return
+    prev.next = null
     return cur.value
   }
 
   unshift(value: T): void {
     this.length += 1
-    let node = this.createNode(value)
+    const node = this.createNode(value)
 
     node.next = this.head
     this.head = node
@@ -78,7 +79,7 @@ class SinglyLinkedList<T>
 
     this.length -= 1
 
-    let cur = this.head
+    const cur = this.head
     this.head = cur.next
     cur.next = null
     return cur.value
@@ -96,11 +97,11 @@ class SinglyLinkedList<T>
           return { value: null, done: true }
         }
 
-        let cur = next
+        const cur = next
         next = cur.next
 
         return { value: cur.value, done: false }
-      },
+      }
     }
   }
 

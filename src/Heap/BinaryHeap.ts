@@ -1,6 +1,6 @@
 class BinaryHeap<T> {
   private queue: T[]
-  private comparison: (itemOne: T, itemTwo: T) => number
+  readonly comparison: (itemOne: T, itemTwo: T) => number
 
   constructor(
     comparison: (itemOne: T, itemTwo: T) => number,
@@ -14,8 +14,8 @@ class BinaryHeap<T> {
     this.queue = []
     this.comparison = comparison
 
-    if (iterable) {
-      for (let item of iterable) {
+    if (iterable !== undefined) {
+      for (const item of iterable) {
         this.insert(item)
       }
     }
@@ -34,7 +34,7 @@ class BinaryHeap<T> {
     let parentIndex: number = Math.floor((index - 1) / 2)
     let parent: T = this.queue[parentIndex]
 
-    while (index > 0 && parent && this.comparison(parent, value) < 0) {
+    while (index > 0 && Boolean(parent) && this.comparison(parent, value) < 0) {
       this.swap(index, parentIndex)
       index = parentIndex
       parentIndex = Math.floor((index - 1) / 2)
@@ -88,7 +88,7 @@ class BinaryHeap<T> {
   }
 
   isEmpty(): boolean {
-    return this.queue.length == 0
+    return this.queue.length === 0
   }
 
   peek(): T {

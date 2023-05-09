@@ -9,6 +9,6 @@ const StackedMate = {
   Stack,
   SinglyLinkedList,
   DoublyLinkedList,
-  BinaryHeap,
+  BinaryHeap
 }
 export default StackedMate

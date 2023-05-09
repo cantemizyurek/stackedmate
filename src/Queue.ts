@@ -6,7 +6,7 @@ class Queue<T> {
   constructor(iterable: Iterable<T>)
   constructor()
   constructor(iterable?: Iterable<T>) {
-    if (iterable) {
+    if (iterable !== undefined) {
       this.queue = new DoublyLinkedLidst<T>(iterable)
     } else {
       this.queue = new DoublyLinkedLidst<T>()
@@ -26,7 +26,7 @@ class Queue<T> {
   }
 
   isEmpty(): boolean {
-    return this.queue.length == 0
+    return this.queue.length === 0
   }
 
   size(): number {

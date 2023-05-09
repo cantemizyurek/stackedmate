@@ -1,4 +1,4 @@
-import { LinkedList, LinkedListNode } from './LinkedList'
+import type { LinkedList, LinkedListNode } from './LinkedList'
 
 interface DoublyLinkedLidstNode<T> extends LinkedListNode<T> {
   value: T
@@ -20,8 +20,8 @@ class DoublyLinkedLidst<T>
     this.tail = this.head
     this.length = 0
 
-    if (iterable) {
-      for (let item of iterable) {
+    if (iterable !== undefined) {
+      for (const item of iterable) {
         this.push(item)
       }
     }
@@ -49,7 +49,7 @@ class DoublyLinkedLidst<T>
 
     this.length -= 1
 
-    let cur = this.tail
+    const cur = this.tail
 
     if (cur.previus == null) {
       this.tail = null
@@ -79,13 +79,13 @@ class DoublyLinkedLidst<T>
   }
 
   shift(): T | undefined {
-    if (this.head == null || this.tail == null) return undefined
+    if (this.head === null || this.tail === null) return undefined
 
     this.length -= 1
 
-    let cur = this.head
+    const cur = this.head
 
-    if (this.length == 0) {
+    if (this.length === 0) {
       this.head = null
       this.tail = null
 
@@ -94,7 +94,8 @@ class DoublyLinkedLidst<T>
 
     this.head = cur.next
     cur.next = null
-    this.head!.previus = null
+    if (this.head === null) return
+    this.head.previus = null
 
     return cur.value
   }
@@ -111,11 +112,11 @@ class DoublyLinkedLidst<T>
           return { value: null, done: true }
         }
 
-        let cur = next
+        const cur = next
         next = cur.next
 
         return { value: cur.value, done: false }
-      },
+      }
     }
   }
 

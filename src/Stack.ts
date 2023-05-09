@@ -5,8 +5,8 @@ class Stack<T> {
   constructor(iterable: Iterable<T>)
   constructor(iterable?: Iterable<T>) {
     this.stack = []
-    if (iterable) {
-      for (let item of iterable) {
+    if (iterable !== undefined) {
+      for (const item of iterable) {
         this.push(item)
       }
     }
@@ -25,7 +25,7 @@ class Stack<T> {
   }
 
   isEmpty(): boolean {
-    return this.stack.length == 0
+    return this.stack.length === 0
   }
 
   size(): number {
