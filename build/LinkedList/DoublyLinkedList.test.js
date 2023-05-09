@@ -1,0 +1,51 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const DoublyLinkedList_1 = __importDefault(require("./DoublyLinkedList"));
+describe('DoublyLinkedList', () => {
+    test('push, pop, unshift, and shift operations', () => {
+        const list = new DoublyLinkedList_1.default();
+        expect(list.length).toBe(0);
+        list.push(1);
+        expect(list.length).toBe(1);
+        expect(list.head.value).toBe(1);
+        expect(list.tail.value).toBe(1);
+        list.push(2);
+        expect(list.length).toBe(2);
+        expect(list.head.value).toBe(1);
+        expect(list.tail.value).toBe(2);
+        list.unshift(0);
+        expect(list.length).toBe(3);
+        expect(list.head.value).toBe(0);
+        expect(list.tail.value).toBe(2);
+        const shifted = list.shift();
+        expect(shifted).toBe(0);
+        expect(list.length).toBe(2);
+        expect(list.head.value).toBe(1);
+        expect(list.tail.value).toBe(2);
+        const popped = list.pop();
+        expect(popped).toBe(2);
+        expect(list.length).toBe(1);
+        expect(list.head.value).toBe(1);
+        expect(list.tail.value).toBe(1);
+        list.pop();
+        expect(list.length).toBe(0);
+        expect(list.head).toBe(null);
+        expect(list.tail).toBe(null);
+    });
+    test('pop and shift operations on empty list', () => {
+        const list = new DoublyLinkedList_1.default();
+        const popped = list.pop();
+        expect(popped).toBeUndefined();
+        expect(list.length).toBe(0);
+        expect(list.head).toBe(null);
+        expect(list.tail).toBe(null);
+        const shifted = list.shift();
+        expect(shifted).toBeUndefined();
+        expect(list.length).toBe(0);
+        expect(list.head).toBe(null);
+        expect(list.tail).toBe(null);
+    });
+});
