@@ -34,6 +34,8 @@ class BinaryHeap<T> {
     let parentIndex: number = Math.floor((index - 1) / 2)
     let parent: T = this.queue[parentIndex]
 
+    if (parent === undefined) return
+
     while (index > 0 && Boolean(parent) && this.comparison(parent, value) < 0) {
       this.swap(index, parentIndex)
       index = parentIndex
@@ -55,17 +57,25 @@ class BinaryHeap<T> {
     let childOne: T = this.queue[childOneIndex]
     let childTwo: T = this.queue[childTwoIndex]
 
-    let childOneComparedValue = this.comparison(curent, childOne)
-    let childTwoComparedValue = this.comparison(curent, childTwo)
-
     while (
-      (childOne !== undefined && childOneComparedValue < 0) ||
-      (childTwo !== undefined && childTwoComparedValue < 0)
+      (childOne !== undefined && this.comparison(curent, childOne) < 0) ||
+      (childTwo !== undefined && this.comparison(curent, childTwo) < 0)
     ) {
+      let childOneComparedValue = null
+      let childTwoComparedValue = null
+
+      if (childOne !== undefined) {
+        childOneComparedValue = this.comparison(curent, childOne)
+      }
+
+      if (childTwo !== undefined) {
+        childTwoComparedValue = this.comparison(curent, childTwo)
+      }
+
       if (
-        (childOne !== undefined &&
-          childOneComparedValue < childTwoComparedValue) ||
-        childTwo === undefined
+        childTwoComparedValue === null ||
+        (childOneComparedValue !== null &&
+          childOneComparedValue < childTwoComparedValue)
       ) {
         this.swap(curentIndex, childOneIndex)
         curentIndex = childOneIndex
@@ -80,8 +90,13 @@ class BinaryHeap<T> {
       childOne = this.queue[childOneIndex]
       childTwo = this.queue[childTwoIndex]
 
-      childOneComparedValue = this.comparison(curent, childOne)
-      childTwoComparedValue = this.comparison(curent, childTwo)
+      if (childOne !== undefined) {
+        childOneComparedValue = this.comparison(curent, childOne)
+      }
+
+      if (childTwo !== undefined) {
+        childTwoComparedValue = this.comparison(curent, childTwo)
+      }
     }
 
     return returnValue

@@ -1,5 +1,17 @@
 import BinaryHeap from './BinaryHeap'
 
+enum HospitalPriority {
+  High = 10,
+  Medium = 5,
+  Low = 1
+}
+
+interface Person {
+  name: string
+  age: number
+  priority: HospitalPriority
+}
+
 describe('BinaryHeap', () => {
   const comparison = (a: number, b: number): number => a - b
   let binaryHeap: BinaryHeap<number>
@@ -68,5 +80,35 @@ describe('BinaryHeap', () => {
 
     binaryHeap.extract()
     expect(binaryHeap.size()).toBe(1)
+  })
+
+  test('should correctly handle hospital priority queue', () => {
+    const pq = new BinaryHeap<Person>((a, b) => a.priority - b.priority)
+
+    pq.insert({ name: 'can', age: 17, priority: HospitalPriority.Medium })
+    pq.insert({ name: 'ersan', age: 43, priority: HospitalPriority.High })
+    pq.insert({ name: 'umut', age: 15, priority: HospitalPriority.Low })
+
+    expect(pq.peek()).toEqual({
+      name: 'ersan',
+      age: 43,
+      priority: HospitalPriority.High
+    })
+
+    expect(pq.extract()).toEqual({
+      name: 'ersan',
+      age: 43,
+      priority: HospitalPriority.High
+    })
+    expect(pq.extract()).toEqual({
+      name: 'can',
+      age: 17,
+      priority: HospitalPriority.Medium
+    })
+    expect(pq.extract()).toEqual({
+      name: 'umut',
+      age: 17,
+      priority: HospitalPriority.Low
+    })
   })
 })
