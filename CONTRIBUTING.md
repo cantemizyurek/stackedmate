@@ -41,6 +41,6 @@ After submitting your pull request, please be patient as the maintainers review 
 
 ## Getting Help
 
-If you have any questions or need help with the development process, feel free to [open an issue](https://github.com/yourusername/stackedmate/issues/new) or contact the maintainers directly.
+If you have any questions or need help with the development process, feel free to [open an issue](https://github.com/cantemizyurek/stackedmate/issues/new) or contact the maintainers directly.
 
 Once again, thank you for your interest in contributing to StackedMate. We look forward to working together to make this project even better!
