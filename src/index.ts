@@ -4,10 +4,11 @@ import SinglyLinkedList from './LinkedList/SinglyLinkedList'
 import DoublyLinkedList from './LinkedList/DoublyLinkedList'
 import BinaryHeap from './Heap/BinaryHeap'
 
-export default {
+const StackedMate = {
   Queue,
   Stack,
   SinglyLinkedList,
   DoublyLinkedList,
   BinaryHeap,
 }
+export default StackedMate
