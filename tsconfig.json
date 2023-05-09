@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
+    "outDir": "dist",
     "module": "commonjs",
-    "target": "ES6",
-    "lib": ["es6", "dom"],
-    "outDir": "build",
+    "target": "es6",
+    "sourceMap": true,
+    "declaration": true,
+
     "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "build"]
+  "exclude": ["node_modules", "dist"]
 }

@@ -1,14 +1,20 @@
 {
   "name": "stackedmate",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Stacked Mate is a lightweight and easy-to-use data structures library that provides several commonly used data structures for use in your projects.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "stack",
+    "queue",
+    "linkedlist",
+    "datastructures"
+  ],
+  "author": "can temizyurek",
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^29.5.1",
