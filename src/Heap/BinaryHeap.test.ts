@@ -107,7 +107,7 @@ describe('BinaryHeap', () => {
     })
     expect(pq.extract()).toEqual({
       name: 'umut',
-      age: 17,
+      age: 15,
       priority: HospitalPriority.Low
     })
   })

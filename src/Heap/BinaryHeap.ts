@@ -48,54 +48,54 @@ class BinaryHeap<T> {
     this.swap(0, this.queue.length - 1)
     const returnValue = this.queue.pop()
 
-    const curent: T = this.queue[0]
-    let curentIndex: number = 0
+    const current: T = this.queue[0]
+    let currentIndex: number = 0
 
-    let childOneIndex: number = curentIndex * 2 + 1
-    let childTwoIndex: number = curentIndex * 2 + 2
+    let childOneIndex: number = currentIndex * 2 + 1
+    let childTwoIndex: number = currentIndex * 2 + 2
 
     let childOne: T = this.queue[childOneIndex]
     let childTwo: T = this.queue[childTwoIndex]
 
     while (
-      (childOne !== undefined && this.comparison(curent, childOne) < 0) ||
-      (childTwo !== undefined && this.comparison(curent, childTwo) < 0)
+      (childOne !== undefined && this.comparison(current, childOne) < 0) ||
+      (childTwo !== undefined && this.comparison(current, childTwo) < 0)
     ) {
-      let childOneComparedValue = null
-      let childTwoComparedValue = null
+      let childOneComparedValue: number | undefined
+      let childTwoComparedValue: number | undefined
 
       if (childOne !== undefined) {
-        childOneComparedValue = this.comparison(curent, childOne)
+        childOneComparedValue = this.comparison(current, childOne)
       }
 
       if (childTwo !== undefined) {
-        childTwoComparedValue = this.comparison(curent, childTwo)
+        childTwoComparedValue = this.comparison(current, childTwo)
       }
 
       if (
-        childTwoComparedValue === null ||
-        (childOneComparedValue !== null &&
+        childTwoComparedValue === undefined ||
+        (childOneComparedValue !== undefined &&
           childOneComparedValue < childTwoComparedValue)
       ) {
-        this.swap(curentIndex, childOneIndex)
-        curentIndex = childOneIndex
+        this.swap(currentIndex, childOneIndex)
+        currentIndex = childOneIndex
       } else {
-        this.swap(curentIndex, childTwoIndex)
-        curentIndex = childTwoIndex
+        this.swap(currentIndex, childTwoIndex)
+        currentIndex = childTwoIndex
       }
 
-      childOneIndex = curentIndex * 2 + 1
-      childTwoIndex = curentIndex * 2 + 2
+      childOneIndex = currentIndex * 2 + 1
+      childTwoIndex = currentIndex * 2 + 2
 
       childOne = this.queue[childOneIndex]
       childTwo = this.queue[childTwoIndex]
 
       if (childOne !== undefined) {
-        childOneComparedValue = this.comparison(curent, childOne)
+        childOneComparedValue = this.comparison(current, childOne)
       }
 
       if (childTwo !== undefined) {
-        childTwoComparedValue = this.comparison(curent, childTwo)
+        childTwoComparedValue = this.comparison(current, childTwo)
       }
     }
 
@@ -106,7 +106,7 @@ class BinaryHeap<T> {
     return this.queue.length === 0
   }
 
-  peek(): T {
+  peek(): T | undefined {
     return this.queue[0]
   }
 
