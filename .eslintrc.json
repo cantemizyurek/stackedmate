@@ -20,10 +20,6 @@
       }
     ],
     "@typescript-eslint/indent": "off",
-    "@typescript-eslint/brace-style": "off",
-    "@typescript-eslint/consistent-type-imports": [
-      "error",
-      { "prefer": "type-imports" }
-    ]
+    "@typescript-eslint/brace-style": "off"
   }
 }

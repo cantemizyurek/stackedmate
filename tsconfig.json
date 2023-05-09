@@ -9,7 +9,19 @@
 
     "strictNullChecks": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*"]
+    },
+    "rootDir": "src",
+    "lib": ["dom", "es2017", "esnext.asynciterable"]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist"]
