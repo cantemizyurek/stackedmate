@@ -1,3 +1,9 @@
+interface Children<T> {
+  value: T
+  comparedValue: number | undefined
+  index: number
+}
+
 class BinaryHeap<T> {
   private queue: T[]
   readonly comparison: (itemOne: T, itemTwo: T) => number
@@ -28,11 +34,11 @@ class BinaryHeap<T> {
   }
 
   insert(value: T): void {
-    let index: number = this.queue.length
+    let index = this.queue.length
     this.queue.push(value)
 
-    let parentIndex: number = Math.floor((index - 1) / 2)
-    let parent: T = this.queue[parentIndex]
+    let parentIndex = Math.floor((index - 1) / 2)
+    let parent = this.queue[parentIndex]
 
     if (parent === undefined) return
 
@@ -48,58 +54,59 @@ class BinaryHeap<T> {
     this.swap(0, this.queue.length - 1)
     const returnValue = this.queue.pop()
 
-    const current: T = this.queue[0]
     let currentIndex: number = 0
-
-    let childOneIndex: number = currentIndex * 2 + 1
-    let childTwoIndex: number = currentIndex * 2 + 2
-
-    let childOne: T = this.queue[childOneIndex]
-    let childTwo: T = this.queue[childTwoIndex]
+    let children = this.getChildren(currentIndex)
 
     while (
-      (childOne !== undefined && this.comparison(current, childOne) < 0) ||
-      (childTwo !== undefined && this.comparison(current, childTwo) < 0)
+      (children[0].comparedValue !== undefined &&
+        children[0].comparedValue < 0) ||
+      (children[1].comparedValue !== undefined && children[1].comparedValue < 0)
     ) {
-      let childOneComparedValue: number | undefined
-      let childTwoComparedValue: number | undefined
-
-      if (childOne !== undefined) {
-        childOneComparedValue = this.comparison(current, childOne)
-      }
-
-      if (childTwo !== undefined) {
-        childTwoComparedValue = this.comparison(current, childTwo)
-      }
-
       if (
-        childTwoComparedValue === undefined ||
-        (childOneComparedValue !== undefined &&
-          childOneComparedValue < childTwoComparedValue)
+        children[1].comparedValue === undefined ||
+        (children[0].comparedValue !== undefined &&
+          children[0].comparedValue < children[1].comparedValue)
       ) {
-        this.swap(currentIndex, childOneIndex)
-        currentIndex = childOneIndex
+        this.swap(currentIndex, children[0].index)
+        currentIndex = children[0].index
       } else {
-        this.swap(currentIndex, childTwoIndex)
-        currentIndex = childTwoIndex
+        this.swap(currentIndex, children[1].index)
+        currentIndex = children[1].index
       }
 
-      childOneIndex = currentIndex * 2 + 1
-      childTwoIndex = currentIndex * 2 + 2
-
-      childOne = this.queue[childOneIndex]
-      childTwo = this.queue[childTwoIndex]
-
-      if (childOne !== undefined) {
-        childOneComparedValue = this.comparison(current, childOne)
-      }
-
-      if (childTwo !== undefined) {
-        childTwoComparedValue = this.comparison(current, childTwo)
-      }
+      children = this.getChildren(currentIndex)
     }
 
     return returnValue
+  }
+
+  private getChildren(index: number): [Children<T>, Children<T>] {
+    const currentElement = this.queue[index]
+
+    const elementOne = this.queue[index * 2 + 1]
+    const elementTwo = this.queue[index * 2 + 2]
+
+    return [
+      {
+        value: elementOne,
+        comparedValue: this.calculateComparedValue(currentElement, elementOne),
+        index: index * 2 + 1
+      },
+      {
+        value: elementTwo,
+        comparedValue: this.calculateComparedValue(currentElement, elementTwo),
+        index: index * 2 + 2
+      }
+    ]
+  }
+
+  private calculateComparedValue(
+    elementOne: T,
+    elementTwo: T | undefined
+  ): number | undefined {
+    if (elementTwo === undefined) return undefined
+
+    return this.comparison(elementOne, elementTwo)
   }
 
   isEmpty(): boolean {
